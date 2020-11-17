@@ -28,6 +28,7 @@ export default class IntlPhoneInput extends React.Component {
       selectedCountry:defaultCountry,
       placeholderTextColor: 'grey'
     };
+    this.inputRef = React.createContext();
   }
 
   onChangePropText=(unmaskedPhoneNumber, phoneNumber) => {
@@ -106,7 +107,7 @@ export default class IntlPhoneInput extends React.Component {
   }
 
   focus() {
-    this.props.inputRef.current.focus();
+    this.inputRef.current.focus();
   }
 
   renderModal=() => {
@@ -191,6 +192,7 @@ renderAction=()=>{
         {this.renderModal()}
         <TextInput
           {...inputProps}
+          ref={this.inputRef}
           style={[styles.phoneInputStyle, phoneInputStyle]}
           placeholder={this.props.placeholder || this.state.mask.replace(/9/g, '_')}
           autoCorrect={false}
@@ -226,7 +228,6 @@ IntlPhoneInput.propTypes = {
   closeText: PropTypes.string,
   searchIconStyle: PropTypes.object,
   disableCountryChange: PropTypes.bool,
-  inputRef: PropTypes.object,
   placeholderTextColor: PropTypes.string
 };
 
